@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body" th:with="contact=${customer.contactInfo()}, address=${customer.contactInfo().address()},
+                                  card=${customer.creditCard()}, profile=${customer.profile()}">
+    <p class="petstore_title" th:text="#{account.title}">Your Account Information</p>
+
+    <p class="petstore_title" th:text="#{account.contact}">Contact Information</p>
+    <table class="form-table petstore_form" id="account-contact">
+        <tr><td class="label" th:text="#{account.firstName}">First Name</td><td id="given-name" th:text="${contact.givenName}"></td></tr>
+        <tr><td class="label" th:text="#{account.lastName}">Last Name</td><td id="family-name" th:text="${contact.familyName}"></td></tr>
+        <tr><td class="label" th:text="#{account.street}">Street Address</td><td th:text="${address.street1}"></td></tr>
+        <tr><td></td><td th:text="${address.street2}"></td></tr>
+        <tr><td class="label" th:text="#{account.city}">City</td><td id="city" th:text="${address.city}"></td></tr>
+        <tr><td class="label" th:text="#{account.state}">State/Province</td><td th:text="${address.state}"></td></tr>
+        <tr><td class="label" th:text="#{account.postalCode}">Postal Code</td><td th:text="${address.zipCode}"></td></tr>
+        <tr><td class="label" th:text="#{account.country}">Country</td><td th:text="${address.country}"></td></tr>
+        <tr><td class="label" th:text="#{account.telephone}">Telephone Number</td><td th:text="${contact.telephone}"></td></tr>
+        <tr><td class="label" th:text="#{account.email}">E-Mail</td><td id="email" th:text="${contact.email}"></td></tr>
+    </table>
+
+    <p class="petstore_title" th:text="#{account.card}">Credit Card Information</p>
+    <table class="form-table petstore_form" id="account-card">
+        <tr><td class="label" th:text="#{account.cardType}">Card Type</td><td id="card-type" th:text="${card.type}"></td></tr>
+        <tr><td class="label" th:text="#{account.cardNumber}">Card Number</td><td id="card-number" th:text="${card.masked()}"></td></tr>
+        <tr><td class="label" th:text="#{account.cardExpiry}">Card Expiry Date</td>
+            <td id="card-expiry" th:text="${card.expiryMonth() + ' / ' + card.expiryYear()}"></td></tr>
+    </table>
+
+    <p class="petstore_title" th:text="#{account.profile}">Profile Information</p>
+    <table class="form-table petstore_form" id="account-profile">
+        <tr><td></td><td><span th:text="#{account.language}"></span>
+            <b id="language" th:text="#{${'language.' + profile.preferredLanguage}}">English</b></td></tr>
+        <tr><td></td><td><span th:text="#{account.favoriteCategory}"></span>
+            <b id="favorite-category" th:text="${profile.favoriteCategory}">BIRDS</b></td></tr>
+        <tr>
+            <td id="mylist-pref" th:class="${profile.myList} ? 'yes' : 'no'" th:text="${profile.myList} ? #{account.yes} : #{account.no}"></td>
+            <td th:text="#{account.myList}"></td>
+        </tr>
+        <tr>
+            <td id="banners-pref" th:class="${profile.banners} ? 'yes' : 'no'" th:text="${profile.banners} ? #{account.yes} : #{account.no}"></td>
+            <td th:text="#{account.banners}"></td>
+        </tr>
+    </table>
+    <p class="petstore"><a th:href="@{/update_customer.screen}" id="edit-account" th:text="#{account.edit}">Edit Your Account Information</a></p>
+</div>
+</body>
+</html>

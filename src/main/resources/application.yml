@@ -1,0 +1,70 @@
+spring:
+  application:
+    name: petstore
+  profiles:
+    default: mongo
+  messages:
+    basename: messages
+    fallback-to-system-locale: false
+  cache:
+    type: caffeine
+    cache-names: categories,products,items
+    # The legacy JSPs cached the sidebar/category/product fragments for 300000 ms.
+    caffeine:
+      spec: maximumSize=2000,expireAfterWrite=5m,recordStats
+
+server:
+  servlet:
+    session:
+      timeout: 15m
+  error:
+    include-stacktrace: never
+    include-message: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+petstore:
+  populate:
+    on-startup: true
+    allow-force: ${PETSTORE_ALLOW_REPOPULATE:true}
+  paging:
+    list-size: 2
+    my-list-size: 10
+
+---
+spring:
+  config:
+    activate:
+      on-profile: mongo
+  mongodb:
+    uri: ${MONGODB_URI:mongodb://localhost:27017/petstore}
+  data:
+    mongodb:
+      representation:
+        big-decimal: decimal128
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration
+
+---
+spring:
+  config:
+    activate:
+      on-profile: jdbc
+  datasource:
+    url: ${JDBC_URL:jdbc:h2:mem:petstore;DB_CLOSE_DELAY=-1}
+    username: ${JDBC_USERNAME:sa}
+    password: ${JDBC_PASSWORD:}
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema.sql
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.mongodb.autoconfigure.MongoAutoConfiguration
+      - org.springframework.boot.data.mongodb.autoconfigure.DataMongoAutoConfiguration
+      - org.springframework.boot.data.mongodb.autoconfigure.DataMongoRepositoriesAutoConfiguration

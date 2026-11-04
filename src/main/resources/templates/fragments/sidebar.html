@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<table th:fragment="sidebar" class="box" id="sidebar">
+    <tr><td class="box-title" th:text="#{sidebar.pets}">Pets</td></tr>
+    <tr>
+        <td class="box-body">
+            <div class="petstore">
+                <th:block th:each="category : ${sidebarCategories}">
+                    <a th:href="@{/category.screen(category_id=${category.id})}" th:text="${category.name}">Fish</a><br>
+                </th:block>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

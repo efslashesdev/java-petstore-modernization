@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<td colspan="3" th:fragment="banner">
+    <table class="banner">
+        <tr>
+            <td>
+                <a th:href="@{/main.screen}"><img th:src="@{/images/banner_logo.gif}" th:alt="#{banner.logo}"></a>
+            </td>
+            <td class="petstore links">
+                <form th:action="@{/search.screen}" method="get" role="search">
+                    <input class="petstore_listing" type="text" name="keywords" size="8"
+                           th:value="${keywords}" aria-label="Search">
+                    <input class="petstore_listing" type="submit" th:value="#{banner.search}">
+                </form>
+                <br>
+                <a th:href="@{/customer.do}" th:text="#{banner.account}">Account</a> |
+                <a th:href="@{/cart.do}" id="cart-link" th:text="#{banner.cart}">Cart</a> |
+                <form th:if="${signedOn}" th:action="@{/signoff.do}" method="post" class="inline">
+                    <button type="submit" class="link-button" th:text="#{banner.signout}">Sign out</button>
+                </form>
+                <a th:unless="${signedOn}" th:href="@{/signon_welcome.screen}" th:text="#{banner.signin}">Sign in</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="flags">
+                <a th:href="@{/changelocale.do(locale='en_US')}"><img th:src="@{/images/us_flag.gif}" th:alt="#{banner.toEnglish}"></a>
+                <a th:href="@{/changelocale.do(locale='ja_JP')}"><img th:src="@{/images/ja_flag.gif}" th:alt="#{banner.toJapanese}"></a>
+                <a th:href="@{/changelocale.do(locale='zh_CN')}"><img th:src="@{/images/zh_flag.gif}" th:alt="#{banner.toChinese}"></a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><hr></td>
+        </tr>
+    </table>
+</td>
+</body>
+</html>

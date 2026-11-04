@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Java Pet Store - Error</title>
+    <link rel="stylesheet" th:href="@{/css/petstore.css}">
+</head>
+<body class="petstore">
+<p class="error-heading" th:text="${status} + ' ' + ${error}">500 Internal Server Error</p>
+<p>Oops! Your request cannot be completed. Please notify the administrator.</p>
+<p><a th:href="@{/main.screen}">Back to the store</a></p>
+</body>
+</html>

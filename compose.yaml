@@ -1,0 +1,28 @@
+# docker compose up -d mongo        -> just the database, run the app from your IDE / mvnw
+# docker compose up --build         -> database + app on http://localhost:8080
+services:
+  mongo:
+    image: mongo:8.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  petstore:
+    build: .
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/petstore
+    ports:
+      - "8080:8080"
+    profiles: [app]
+
+volumes:
+  mongo-data:

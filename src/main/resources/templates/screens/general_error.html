@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <p class="error-heading" id="general-error" th:text="#{error.title}">Server Error</p>
+    <p th:text="${notFound} ? #{error.notFound} : #{error.text}">Oops! Your request cannot be completed.</p>
+    <p><a th:href="@{/main.screen}" th:text="#{title.main}">Back to the store</a></p>
+</div>
+</body>
+</html>

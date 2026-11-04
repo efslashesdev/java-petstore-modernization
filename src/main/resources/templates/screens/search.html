@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <p class="petstore_title" th:if="${page.size == 0}" id="no-results" th:text="#{search.noResults}">No results</p>
+    <th:block th:unless="${page.size == 0}">
+        <p class="petstore_title" th:text="#{search.results}">Search Results:</p>
+        <p class="petstore"><span th:text="#{search.matching}">Items matching any of:</span> <b th:text="${keywords}">fish</b></p>
+        <table class="listing" id="results">
+            <tr th:each="item : ${page.list}">
+                <td class="petstore_listing">
+                    <a th:href="@{/item.screen(item_id=${item.itemId})}" th:text="${item.displayName()}">Large Angelfish</a><br>
+                    <span th:text="${item.description}"></span>
+                </td>
+                <!--/* The legacy search page showed unit cost where every other page shows list price. Kept as-is. */-->
+                <td class="petstore_listing price">
+                    <span th:text="${#numbers.formatCurrency(item.unitCost)}">$10.00</span><br>
+                    <form th:replace="~{fragments/add-to-cart :: form(${item.itemId})}"></form>
+                </td>
+            </tr>
+        </table>
+        <div th:replace="~{fragments/paging :: paging('/search.screen', 'keywords', ${keywords})}"></div>
+    </th:block>
+</div>
+</body>
+</html>

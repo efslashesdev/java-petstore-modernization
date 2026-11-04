@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <p class="petstore_title" id="signon-error" th:text="#{signon.failed.title}">Sign-in Error</p>
+    <p class="petstore" th:text="#{signon.failed.text}">The user name and password you entered were not found.</p>
+    <p class="petstore"><a th:href="@{/signon.screen}" th:text="#{signon.failed.back}">Back to sign in</a></p>
+</div>
+</body>
+</html>

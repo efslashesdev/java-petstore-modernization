@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--/* Shared by category, product and search. The legacy JSPs repeated this block three times. */-->
+<div th:fragment="paging(path, idName, idValue)" class="paging petstore_listing">
+    <a th:if="${page.previousPageAvailable}" id="page-previous"
+       th:href="@{${path}(${idName}=${idValue}, start=${page.startOfPreviousPage}, count=${page.size})}"
+       th:text="#{paging.previous}">Previous</a>
+    <a th:if="${page.nextPageAvailable}" id="page-next"
+       th:href="@{${path}(${idName}=${idValue}, start=${page.startOfNextPage}, count=${page.size})}"
+       th:text="#{paging.next}">Next</a>
+</div>
+</body>
+</html>

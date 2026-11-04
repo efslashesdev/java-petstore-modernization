@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.toLanguageTag()}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="#{${screen.titleKey}}">Java Pet Store</title>
+    <link rel="stylesheet" th:href="@{/css/petstore.css}">
+</head>
+<body>
+<table class="page">
+    <tr>
+        <td colspan="3" th:replace="~{fragments/banner :: banner}"></td>
+    </tr>
+    <tr>
+        <td class="sidebar" th:insert="~{fragments/sidebar :: sidebar}"></td>
+        <td class="body" id="body" th:insert="~{${screen.body} :: body}"></td>
+        <td class="mylist"><th:block th:if="${screen.myList and myList != null}"
+                                     th:insert="~{fragments/mylist :: mylist}"/></td>
+    </tr>
+    <tr th:if="${screen.adviceBanner and adviceBanner != null}">
+        <td colspan="3">
+            <div class="advice"><img th:src="@{/images/{img}(img=${adviceBanner})}" alt="" id="advice-banner"></div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" th:insert="~{fragments/footer :: footer}"></td>
+    </tr>
+</table>
+</body>
+</html>

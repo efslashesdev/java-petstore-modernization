@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form th:fragment="form(itemId)" th:action="@{/cart.do}" method="post" class="inline add-to-cart">
+    <input type="hidden" name="action" value="purchase">
+    <input type="hidden" name="itemId" th:value="${itemId}">
+    <button type="submit" class="link-button petstore_listing" th:attr="data-item=${itemId}"
+            th:text="#{catalog.addToCart}">Add to Cart</button>
+</form>
+</body>
+</html>

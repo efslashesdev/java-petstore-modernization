@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <p class="petstore_title" id="signed-off" th:text="#{signoff.title}">You are signed out.</p>
+    <p class="petstore" th:text="#{signoff.thanks}">Thank you for shopping.</p>
+    <p class="petstore"><a th:href="@{/signon_welcome.screen}" th:text="#{signoff.again}">You may sign in again.</a></p>
+</div>
+</body>
+</html>

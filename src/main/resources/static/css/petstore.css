@@ -1,0 +1,63 @@
+/* Lifted from the inline <style> block and table attributes of the legacy template.jsp. */
+
+body {
+    margin: 0;
+    background: #fff;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.petstore { font-size: small; }
+.petstore_title { font-weight: bold; }
+.petstore_footer { font-size: x-small; text-align: center; }
+.petstore_listing { font-size: x-small; }
+.petstore_form { font-size: x-small; }
+
+.page { width: 100%; border-collapse: collapse; }
+.page > tbody > tr > td { padding: 5px; vertical-align: top; }
+.page .sidebar { width: 20%; }
+.page .body { width: 60%; }
+
+.banner { width: 100%; border-collapse: collapse; }
+.banner .links { text-align: right; vertical-align: middle; }
+.banner .flags { text-align: right; }
+.banner .flags a { margin-left: 8px; }
+.banner img { border: 0; }
+
+.box { width: 100%; border-collapse: collapse; }
+.box .box-title { background: #336666; color: #fff; text-align: center; font-weight: bold; padding: 1px; }
+.box .box-body { background: #336666; padding: 0 1px 1px; }
+.box .box-body > div { background: #fff; padding: 5px; }
+
+.listing { width: 100%; border: 1px solid #808080; border-collapse: collapse; background: #fff; }
+.listing td { padding: 2px; }
+.listing .price { text-align: right; white-space: nowrap; }
+.listing .total { background: #ccccff; text-align: right; }
+.paging { text-align: right; }
+.paging a { margin-left: 6px; }
+
+.advice { width: 100%; background: #336666; text-align: center; padding: 1px; }
+
+.form-table td { padding: 5px; }
+.form-table .label { text-align: right; font-weight: bold; white-space: nowrap; }
+.field-error { color: #c00; display: block; }
+.form-errors { color: #c00; font-weight: bold; }
+input.invalid, select.invalid { border: 1px solid #c00; }
+
+.signon-boxes { border-collapse: collapse; }
+.signon-boxes > tbody > tr > td { border: 1px solid #000; padding: 20px; vertical-align: top; }
+
+.error-heading { color: red; font-size: x-large; }
+.yes { color: green; font-size: larger; }
+.no { color: red; font-size: larger; }
+
+/* "Sign out" and "Add to Cart" are POSTs now but should still look like the legacy links. */
+.link-button {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: #00e;
+    text-decoration: underline;
+    cursor: pointer;
+    font: inherit;
+}
+form.inline { display: inline; margin: 0; }

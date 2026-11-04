@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--/* Account details shared by sign-up (create_customer) and edit (edit_customer). */-->
+<th:block th:fragment="fields">
+    <p class="form-errors" th:if="${#fields.hasErrors('*')}" th:text="#{form.errors}">Please correct the highlighted fields.</p>
+
+    <p class="petstore_title" th:text="#{account.contact}">Contact Information</p>
+    <table th:replace="~{fragments/contact :: fields('contact')}"></table>
+
+    <p class="petstore_title" th:text="#{account.card}">Credit Card Information</p>
+    <table class="form-table petstore_form">
+        <tr>
+            <td class="label"><label for="cardNumber" th:text="#{account.cardNumber}">Card Number</label></td>
+            <td>
+                <input type="text" size="30" maxlength="30" th:field="*{cardNumber}" th:errorclass="invalid">
+                <span class="field-error" th:errors="*{cardNumber}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="label"><label for="cardType" th:text="#{account.cardType}">Card Type</label></td>
+            <td>
+                <select th:field="*{cardType}">
+                    <option th:each="o : ${@formOptions.cardTypes(customerForm.cardType)}"
+                            th:value="${o.value}" th:text="${o.label}"></option>
+                </select>
+                <span class="field-error" th:errors="*{cardType}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="label"><label for="expiryMonth" th:text="#{account.cardExpiry}">Expiry Date</label></td>
+            <td>
+                <select th:field="*{expiryMonth}">
+                    <option th:each="m : ${@formOptions.months()}" th:value="${m}" th:text="${m}"></option>
+                </select>
+                /
+                <select th:field="*{expiryYear}" aria-label="Expiry year">
+                    <option th:each="o : ${@formOptions.years(customerForm.expiryYear)}"
+                            th:value="${o.value}" th:text="${o.label}"></option>
+                </select>
+                <span class="field-error" th:errors="*{expiryMonth}"></span>
+                <span class="field-error" th:errors="*{expiryYear}"></span>
+            </td>
+        </tr>
+    </table>
+
+    <p class="petstore_title" th:text="#{account.profile}">Profile Information</p>
+    <table class="form-table petstore_form">
+        <tr>
+            <td></td>
+            <td>
+                <label for="language" th:text="#{account.language}">I want MyPetStore to be in</label>
+                <select th:field="*{language}">
+                    <option value="en_US" th:text="#{language.en_US}">English</option>
+                    <option value="ja_JP" th:text="#{language.ja_JP}">Japanese</option>
+                    <option value="zh_CN" th:text="#{language.zh_CN}">Chinese</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <label for="favoriteCategory" th:text="#{account.favoriteCategory}">My favorite category is</label>
+                <select th:field="*{favoriteCategory}">
+                    <option th:each="c : ${sidebarCategories}" th:value="${c.id}" th:text="${c.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" th:field="*{myList}"></td>
+            <td>
+                <label for="myList1" th:text="#{account.myList}">Enable MyList</label>
+                <i th:text="#{account.myList.hint}"></i>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" th:field="*{banners}"></td>
+            <td>
+                <label for="banners1" th:text="#{account.banners}">Enable pet tips</label>
+                <i th:text="#{account.banners.hint}"></i>
+            </td>
+        </tr>
+    </table>
+</th:block>
+</body>
+</html>

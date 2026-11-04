@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <p class="error-heading" id="empty-cart-error" th:text="#{order.emptyCart.title}">Order Error</p>
+    <hr>
+    <p th:text="#{order.emptyCart.text}">The Shopping Cart is Empty and the order could not be placed.</p>
+    <p th:text="#{order.emptyCart.hint}"></p>
+</div>
+</body>
+</html>

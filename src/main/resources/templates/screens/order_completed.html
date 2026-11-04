@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <p class="petstore" th:text="#{order.complete.title}">Your Order is Complete</p>
+    <hr>
+    <p id="order-id" th:attr="data-order-id=${orderId}" th:text="#{order.complete.id(${orderId})}">Your order Id is 10011</p>
+    <p th:if="${orderEmail != null}" th:text="#{order.complete.email(${orderEmail})}">You should receive a confirmation e-mail</p>
+    <p th:text="#{order.complete.thanks}">Thank you for shopping with the Java Pet Store Demo.</p>
+</div>
+</body>
+</html>

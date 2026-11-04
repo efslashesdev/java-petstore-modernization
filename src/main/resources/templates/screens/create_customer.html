@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <p class="petstore_title" th:text="#{account.title}">Your Account Information</p>
+    <form th:action="@{/createcustomer.do}" th:object="${customerForm}" method="post" id="customer-form">
+        <th:block th:replace="~{fragments/customer-form :: fields}"></th:block>
+        <input class="petstore_form" type="submit" th:value="#{account.submit}" id="customer-submit">
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <p class="error-heading" id="duplicate-account" th:text="#{duplicate.title}">User Creation Error!</p>
+    <hr>
+    <p th:text="#{duplicate.text}">The User name you have chosen is in use.</p>
+    <p><a th:href="@{/signon.screen}" th:text="#{signon.failed.back}">Back to sign in</a></p>
+</div>
+</body>
+</html>

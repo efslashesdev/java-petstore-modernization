@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <p class="petstore_title" th:if="${cart.isEmpty()}" id="cart-empty" th:text="#{cart.empty}">Your Shopping Cart is Empty.</p>
+    <th:block th:unless="${cart.isEmpty()}">
+        <p class="petstore_title" th:text="#{cart.title}">Shopping Cart</p>
+        <form th:action="@{/cart.do}" method="post" id="cart-form">
+            <input type="hidden" name="action" value="update">
+            <table class="listing" id="cart-lines">
+                <tr th:each="line : ${cart.lines}" th:attr="data-item=${line.item.itemId}">
+                    <td class="petstore_listing" width="50%">
+                        <a th:href="@{/item.screen(item_id=${line.item.itemId})}" th:text="${line.item.displayName()}">Large Angelfish</a>
+                    </td>
+                    <td class="petstore_listing">
+                        <button type="submit" form="remove-form" name="itemId" th:value="${line.item.itemId}"
+                                class="link-button petstore_listing" th:text="#{cart.remove}">Remove</button>
+                    </td>
+                    <td class="petstore_listing price">
+                        <input type="text" maxlength="10" size="3" th:name="${'itemQuantity_' + line.item.itemId}"
+                               th:value="${line.quantity}" th:attr="aria-label=${'Quantity of ' + line.item.itemId}">
+                    </td>
+                    <td class="petstore_listing price">@ <span th:text="${#numbers.formatCurrency(line.unitPrice())}">$16.50</span></td>
+                </tr>
+                <tr>
+                    <td class="petstore_listing" colspan="2"><input type="submit" th:value="#{cart.update}"></td>
+                    <td class="petstore_listing price"><b th:text="#{cart.total}">Total:</b></td>
+                    <td class="petstore_listing total" id="cart-total" th:text="${#numbers.formatCurrency(cart.subTotal())}">$16.50</td>
+                </tr>
+            </table>
+            <p class="petstore" style="text-align: right">
+                <a th:href="@{/enter_order_information.screen}" id="checkout" th:text="#{cart.checkout}">Check Out</a>
+            </p>
+        </form>
+        <!--/* Separate form so a "Remove" click doesn't submit the quantity fields as an update. */-->
+        <form th:action="@{/cart.do}" method="post" id="remove-form">
+            <input type="hidden" name="action" value="remove">
+        </form>
+    </th:block>
+</div>
+</body>
+</html>

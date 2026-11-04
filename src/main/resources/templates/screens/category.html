@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <p class="petstore_title" th:text="#{category.title}">Products for this Category</p>
+    <table class="listing" id="products">
+        <tr th:each="product : ${page.list}">
+            <td class="petstore_listing">
+                <a th:href="@{/product.screen(product_id=${product.id})}" th:text="${product.name}">Angelfish</a><br>
+                <span th:text="${product.description}">Salt Water fish from Australia</span>
+            </td>
+        </tr>
+    </table>
+    <div th:replace="~{fragments/paging :: paging('/category.screen', 'category_id', ${categoryId})}"></div>
+</div>
+</body>
+</html>

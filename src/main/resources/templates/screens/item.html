@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <p class="petstore_title" id="item-name" th:text="${item.displayName()}">Large Angelfish</p>
+    <table>
+        <tr>
+            <td><img th:src="@{/images/{img}(img=${item.image})}" th:alt="${item.productName}"></td>
+            <td class="petstore">
+                <b th:text="#{item.listPrice}">List Price:</b>
+                <span id="list-price" th:text="${#numbers.formatCurrency(item.listPrice)}">$16.50</span>
+                <br><br>
+                <b th:text="#{item.yourPrice}">Your Price:</b>
+                <span id="your-price" th:text="${#numbers.formatCurrency(item.unitCost)}">$10.00</span>
+                <br><br>
+                <form th:replace="~{fragments/add-to-cart :: form(${item.itemId})}"></form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

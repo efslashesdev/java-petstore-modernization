@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <p class="petstore_title" th:text="#{signon.title}">Sign In</p>
+    <p class="petstore"><b th:text="#{signon.returning}">Are you a returning customer?</b></p>
+    <table class="signon-boxes">
+        <tr>
+            <td>
+                <!--/* Legacy form also pre-filled the password "j2ee". We only suggest the demo user name. */-->
+                <form th:action="@{/j_signon_check}" method="post" id="signon-form">
+                    <table class="form-table petstore_form">
+                        <tr><td colspan="2" class="petstore"><b th:text="#{signon.yes}">Yes.</b></td></tr>
+                        <tr>
+                            <td class="label"><label for="j_username" th:text="#{signon.username}">User Name:</label></td>
+                            <td><input type="text" size="15" id="j_username" name="j_username"
+                                       th:value="${rememberedUser != null and rememberedUser != '' ? rememberedUser : 'j2ee'}"></td>
+                        </tr>
+                        <tr>
+                            <td class="label"><label for="j_password" th:text="#{signon.password}">Password:</label></td>
+                            <td><input type="password" size="15" id="j_password" name="j_password"></td>
+                        </tr>
+                        <tr><td colspan="2"><input type="submit" th:value="#{signon.submit}" id="signon-submit"></td></tr>
+                        <tr>
+                            <td colspan="2">
+                                <label for="j_remember_username" th:text="#{signon.remember}">Remember My User Name</label>
+                                <input type="checkbox" id="j_remember_username" name="j_remember_username"
+                                       th:checked="${rememberedUser != null and rememberedUser != ''}">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/createuser.do}" th:object="${newUser}" method="post" id="newuser-form">
+                    <table class="form-table petstore_form">
+                        <tr><td colspan="2" class="petstore"><b th:text="#{signon.no}">No. I would like to sign up.</b></td></tr>
+                        <tr>
+                            <td class="label"><label for="username" th:text="#{signon.username}">User Name:</label></td>
+                            <td>
+                                <input type="text" size="15" th:field="*{username}" th:errorclass="invalid">
+                                <span class="field-error" th:errors="*{username}"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label"><label for="password" th:text="#{signon.password}">Password:</label></td>
+                            <td>
+                                <input type="password" size="15" th:field="*{password}" th:errorclass="invalid">
+                                <span class="field-error" th:errors="*{password}"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label"><label for="passwordRepeat" th:text="#{signon.passwordRepeat}">Password (Repeat):</label></td>
+                            <td>
+                                <input type="password" size="15" th:field="*{passwordRepeat}">
+                                <span class="field-error" th:errors="*{passwordConfirmed}"></span>
+                            </td>
+                        </tr>
+                        <tr><td colspan="2"><input type="submit" th:value="#{signon.create}" id="newuser-submit"></td></tr>
+                    </table>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

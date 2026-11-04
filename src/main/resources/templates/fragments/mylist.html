@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<table th:fragment="mylist" class="box" id="mylist">
+    <tr><td class="box-title" th:text="#{mylist.title}">My List</td></tr>
+    <tr>
+        <td class="box-body">
+            <div class="petstore">
+                <th:block th:each="product : ${myList}">
+                    <a th:href="@{/product.screen(product_id=${product.id})}" th:text="${product.name}">Iguana</a><br>
+                </th:block>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

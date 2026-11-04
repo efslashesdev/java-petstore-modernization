@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="body">
+    <form th:action="@{/order.do}" th:object="${orderForm}" method="post" id="order-form">
+        <p class="form-errors" th:if="${#fields.hasErrors('*')}" th:text="#{form.errors}">Please correct the highlighted fields.</p>
+        <p class="petstore_title" th:text="#{order.billing}">Billing Information</p>
+        <table th:replace="~{fragments/contact :: fields('billTo')}"></table>
+        <p class="petstore_title" th:text="#{order.shipping}">Shipping Information</p>
+        <table th:replace="~{fragments/contact :: fields('shipTo')}"></table>
+        <input class="petstore_form" type="submit" th:value="#{order.submit}" id="order-submit">
+    </form>
+</div>
+</body>
+</html>

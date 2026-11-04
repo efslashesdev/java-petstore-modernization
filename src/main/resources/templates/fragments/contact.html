@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--/*
+  Contact/address rows, used by the account forms (prefix "contact") and checkout (prefix "billTo"/"shipTo").
+  Must be inserted inside a form that has th:object set.
+*/-->
+<table th:fragment="fields(prefix)" class="form-table petstore_form" th:id="${prefix}">
+    <tr>
+        <td class="label"><label th:for="${prefix + '.givenName'}" th:text="#{account.firstName}">First Name</label></td>
+        <td colspan="2">
+            <input type="text" size="30" maxlength="30" th:field="*{__${prefix}__.givenName}" th:errorclass="invalid">
+            <span class="field-error" th:errors="*{__${prefix}__.givenName}"></span>
+        </td>
+    </tr>
+    <tr>
+        <td class="label"><label th:for="${prefix + '.familyName'}" th:text="#{account.lastName}">Last Name</label></td>
+        <td colspan="2">
+            <input type="text" size="30" maxlength="30" th:field="*{__${prefix}__.familyName}" th:errorclass="invalid">
+            <span class="field-error" th:errors="*{__${prefix}__.familyName}"></span>
+        </td>
+    </tr>
+    <tr>
+        <td class="label"><label th:for="${prefix + '.street1'}" th:text="#{account.street}">Street Address</label></td>
+        <td colspan="2">
+            <input type="text" size="55" maxlength="70" th:field="*{__${prefix}__.street1}" th:errorclass="invalid">
+            <span class="field-error" th:errors="*{__${prefix}__.street1}"></span>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="2">
+            <input type="text" size="55" maxlength="70" th:field="*{__${prefix}__.street2}" th:errorclass="invalid"
+                   aria-label="Street address line 2">
+            <span class="field-error" th:errors="*{__${prefix}__.street2}"></span>
+        </td>
+    </tr>
+    <tr>
+        <td class="label"><label th:for="${prefix + '.city'}" th:text="#{account.city}">City</label></td>
+        <td colspan="2">
+            <input type="text" size="55" maxlength="70" th:field="*{__${prefix}__.city}" th:errorclass="invalid">
+            <span class="field-error" th:errors="*{__${prefix}__.city}"></span>
+        </td>
+    </tr>
+    <tr>
+        <td class="label"><label th:for="${prefix + '.state'}" th:text="#{account.state}">State/Province</label></td>
+        <td>
+            <select th:field="*{__${prefix}__.state}" th:with="current=*{__${prefix}__.state}" th:errorclass="invalid">
+                <option th:each="o : ${@formOptions.states(#locale, current)}"
+                        th:value="${o.value}" th:text="${o.label}"></option>
+            </select>
+            <span class="field-error" th:errors="*{__${prefix}__.state}"></span>
+        </td>
+        <td>
+            <label class="label" th:for="${prefix + '.zipCode'}" th:text="#{account.postalCode}">Postal Code</label>
+            <input type="text" size="12" maxlength="12" th:field="*{__${prefix}__.zipCode}" th:errorclass="invalid">
+            <span class="field-error" th:errors="*{__${prefix}__.zipCode}"></span>
+        </td>
+    </tr>
+    <tr>
+        <td class="label"><label th:for="${prefix + '.country'}" th:text="#{account.country}">Country</label></td>
+        <td colspan="2">
+            <select th:field="*{__${prefix}__.country}" th:with="current=*{__${prefix}__.country}">
+                <option th:each="o : ${@formOptions.countries(#locale, current)}"
+                        th:value="${o.value}" th:text="${o.label}"></option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="label"><label th:for="${prefix + '.telephone'}" th:text="#{account.telephone}">Telephone</label></td>
+        <td colspan="2">
+            <input type="text" size="12" maxlength="70" th:field="*{__${prefix}__.telephone}" th:errorclass="invalid">
+            <span class="field-error" th:errors="*{__${prefix}__.telephone}"></span>
+        </td>
+    </tr>
+    <tr>
+        <td class="label"><label th:for="${prefix + '.email'}" th:text="#{account.email}">E-Mail</label></td>
+        <td colspan="2">
+            <input type="text" size="20" maxlength="70" th:field="*{__${prefix}__.email}" th:errorclass="invalid">
+            <span class="field-error" th:errors="*{__${prefix}__.email}"></span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
